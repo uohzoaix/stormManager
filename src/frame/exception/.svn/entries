@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   repos="http://192.168.32.186:81/svn/fubaoWeb"
+   name=""
+   revision="341"
+   last-author="wuzhou"
+   url="http://192.168.32.186:81/svn/fubaoWeb/trade/src/com/f139/frame/exception"
+   uuid="cb771c19-ec08-634f-bd83-0c6872d23004"
+   committed-rev="99"
+   kind="dir"
+   committed-date="2013-06-08T01:47:31.481737Z"/>
+<entry
+   name="ServiceException.java"
+   checksum="e6e0f14ed699cb9b272dc3463fd6f17b"
+   last-author="wuzhou"
+   committed-rev="99"
+   text-time="2013-06-08T01:47:31.000000Z"
+   kind="file"
+   committed-date="2013-06-08T01:47:31.481737Z"/>
+<entry
+   name="TradeErrorCode.java"
+   checksum="5b108f8368cd2e5f99535d91629c38f9"
+   last-author="wuzhou"
+   committed-rev="83"
+   text-time="2013-06-03T09:17:07.000000Z"
+   kind="file"
+   committed-date="2013-06-03T09:17:07.704850Z"/>
+</wc-entries>

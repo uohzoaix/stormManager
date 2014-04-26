@@ -1,0 +1,16 @@
+package com.f139.frame.exception;
+
+public class TradeErrorCode {
+
+	public static String IS_NOT_TRADE = "您的账号还未开通交易功能！请联系021-32556902 QQ:2446719314";
+	
+	public static String IS_NOT_SIGN = "您的账号未签约！请联系021-32556902 QQ:2446719314";
+	
+	public static String IS_NOT_OUTMONEY = "还是预签约状态，不能申请出金。如需开通,请致电工作人员!";
+	
+	public static String IS_NOT_ADDMONEY = "还是预签约状态，不能进行行内入金。如需开通,请致电工作人员!";
+	
+	public static String IS_NOT_ENOUGHMONEY = "您的账号余额不足。";
+	
+	public static String IS_NOT_MATCHLOGIS = "物流配送尚未成功，请联系富宝业务人员！";
+}

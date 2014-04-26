@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   name=""
+   repos="http://192.168.32.186:81/svn/fubaoData"
+   revision="654"
+   last-author="admin"
+   uuid="b534d8d7-9206-6946-b340-58a6be722aaf"
+   url="http://192.168.32.186:81/svn/fubaoData/data/WebContent/WEB-INF/tld"
+   committed-rev="526"
+   kind="dir"
+   committed-date="2013-12-16T10:29:49.567292Z"/>
+<entry
+   name="c.tld"
+   checksum="86331579d244fa23feed7e842c830745"
+   last-author="admin"
+   text-time="2013-12-16T10:29:49.000000Z"
+   committed-rev="526"
+   kind="file"
+   committed-date="2013-12-16T10:29:49.567292Z"/>
+<entry
+   name="fmt.tld"
+   checksum="1519a4468896b65c489c83fcb794444b"
+   last-author="admin"
+   text-time="2013-12-16T10:29:49.000000Z"
+   committed-rev="526"
+   kind="file"
+   committed-date="2013-12-16T10:29:49.567292Z"/>
+<entry
+   name="fn.tld"
+   checksum="7cc679949e667cf0b336fcfc00b335ad"
+   last-author="admin"
+   text-time="2013-12-16T10:29:49.000000Z"
+   committed-rev="526"
+   kind="file"
+   committed-date="2013-12-16T10:29:49.567292Z"/>
+</wc-entries>
