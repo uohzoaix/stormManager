@@ -53,6 +53,14 @@ select {
 	margin-left:25px;
 }
 
+.addsel {
+	margin-left:74px;
+}
+
+.badge-extract {
+	width:7px;
+}
+
 input[type="text"]{
 	margin-bottom:0px;
 }
@@ -74,31 +82,44 @@ $(document).ready(function(){
 		if (topoJSON != "") {
 			topoJSON= topoJSON.replace(/'/g, "\"");
 			var topo = jQuery.parseJSON(topoJSON);
+			$(".dobut").remove();
+			$("#toponame").remove();
+			$("#topos").prepend("<option id='toponame' value='0'>"+topo.name+"</option>");
+			var html="";
 			switch(topo.status){
 				case "ACTIVE":
-					$(".dobut").remove();
-					var html = "<button class='btn btn-primary dobut' style='width:100px' placehoder='"+topo.name+"' type='button' id='inactive'>暂停</button>&nbsp;&nbsp;&nbsp;&nbsp;";
-					html+="<button class='btn btn-primary dobut' style='width:100px' placehoder='"+topo.name+"' type='button' id='reblance'>睡眠</button>&nbsp;&nbsp;&nbsp;&nbsp;";
-					html+="<button class='btn btn-primary dobut' style='width:100px' placehoder='"+topo.name+"' type='button' id='kill'>停止</button>";
-					$(html).insertAfter($(this));
+					html+= "<button class='btn btn-primary dobut' style='width:100px' placehoder='"+topo.name+"' type='button' id='inactive'>暂停</button>&nbsp;&nbsp;&nbsp;&nbsp;";
+					html+="<button class='btn btn-warning dobut' style='width:100px' placehoder='"+topo.name+"' type='button' id='reblance'>睡眠</button>&nbsp;&nbsp;&nbsp;&nbsp;";
+					html+="<button class='btn btn-danger dobut' style='width:100px' placehoder='"+topo.name+"' type='button' id='kill'>停止</button>";
 					break;
 				case "INACTIVE":
-					$(".dobut").remove();
-					var html = "<button class='btn btn-primary dobut' style='width:100px' placehoder='"+topo.name+"' type='button' id='active'>复活</button>&nbsp;&nbsp;&nbsp;&nbsp;";
-					html+="<button class='btn btn-primary dobut' style='width:100px' placehoder='"+topo.name+"' type='button' id='kill'>停止</button>";
-					$(html).insertAfter($(this));
+					html += "<button class='btn btn-primary dobut' style='width:100px' placehoder='"+topo.name+"' type='button' id='active'>复活</button>&nbsp;&nbsp;&nbsp;&nbsp;";
+					html+="<button class='btn btn-danger dobut' style='width:100px' placehoder='"+topo.name+"' type='button' id='kill'>停止</button>";
 					break;
 				case "REBALANCING":
-					$(".dobut").remove();
-					var html = "<button class='btn btn-primary dobut' style='width:100px' placehoder='"+topo.name+"' type='button' id='active'>复活</button>&nbsp;&nbsp;&nbsp;&nbsp;";
-					html+="<button class='btn btn-primary dobut' style='width:100px' placehoder='"+topo.name+"' type='button' id='inactive'>继续睡眠</button>&nbsp;&nbsp;&nbsp;&nbsp;";
-					html+="<button class='btn btn-primary dobut' style='width:100px' placehoder='"+topo.name+"' type='button' id='kill'>停止</button>";
-					$(html).insertAfter($(this));
+					html += "<button class='btn btn-primary dobut' style='width:100px' placehoder='"+topo.name+"' type='button' id='active'>复活</button>&nbsp;&nbsp;&nbsp;&nbsp;";
+					html+="<button class='btn btn-warning dobut' style='width:100px' placehoder='"+topo.name+"' type='button' id='inactive'>继续睡眠</button>&nbsp;&nbsp;&nbsp;&nbsp;";
+					html+="<button class='btn btn-danger dobut' style='width:100px' placehoder='"+topo.name+"' type='button' id='kill'>停止</button>";
 					break;
 				default:
-					
 			}
+			$(html).insertAfter($(this));
+			$("#toponame").attr("selected", true);
 		}
+	});
+	
+	$(".badge-success").click(function(){
+		var html="<span><br><select class='addsel configs'>";
+		$(".configs option").each(function(){
+			html+="<option value="+$(this).text()+">"+$(this).val()+"</option>";
+		});
+		html+="</select>值：<input type='text' class='configVal' name='configVal' value=''/>&nbsp;&nbsp;<span class='badge badge-extract'>-</span></span>";
+		$(this).after(html);
+	});
+	
+	$(document).on("click",".badge-extract",function(){
+		$(this).parent().remove();
+		
 	});
 	
 	$(document).on("click",".dobut",function(){
@@ -147,6 +168,9 @@ $(document).ready(function(){
 				<section id="status">
 					<div class="page-header">
 						<h1>拓扑列表</h1>
+						<button class="btn btn-primary" id="stop" width="100px" type="button">停止storm</button>
+						<button class="btn btn-primary" id="start" width="100px" type="button">启动storm</button>
+						<button class="btn btn-primary" id="restart" width="100px" type="button">重启storm</button>
 					</div>
 					<div>
 						<span>列表：</span>
@@ -164,12 +188,11 @@ $(document).ready(function(){
 							作业名称： <input type="text" name="jobName" id="jobName" title="作业名称"/>
 							<div>
 								<span>参数列表：</span>
-								<select class="" id="configs">
+								<select class="configs">
 									<c:forEach items="${configs }" var="o">
 										<option value="${o }">${o }</option>
 									</c:forEach>
-								</select>
-								值：<input type="text" class="configVal" name="configVal" value=""/>
+								</select>值：<input type="text" class="configVal" name="configVal" value=""/>&nbsp;&nbsp;<span class="badge badge-success">+</span>
 							</div>
 							<button class="btn btn-lg btn-primary btn-block submit" width="100px" type="submit">提交</button>
 	    				</form>

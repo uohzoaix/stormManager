@@ -16,12 +16,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/asm-4.0.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/carbonite-1.5.0.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/clj-stacktrace-0.2.4.jar"/>

@@ -157,7 +157,7 @@ public class Console {
 			Field[] fields = clz.getDeclaredFields();
 			for (Field field : fields) {
 				if (StringUtils.isAllUpperCase(field.getName().replaceAll("_", "")) && field.getType().getName().equals(String.class.getName())
-						&& field.getModifiers() == 25) {
+						&& field.getModifiers() == 25 && field.getName().startsWith("TOPOLOGY_")) {
 					if (field.get(clz) != null)
 						configurations.add(field.get(clz).toString());
 				}
