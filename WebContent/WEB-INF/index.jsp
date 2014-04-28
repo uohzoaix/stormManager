@@ -109,7 +109,7 @@ $(document).ready(function(){
 	});
 	
 	$(".badge-success").click(function(){
-		var html="<span><br><select class='addsel configs'>";
+		var html="<span><br><select name='config' class='addsel configs'>";
 		$(".configs option").each(function(){
 			html+="<option value="+$(this).text()+">"+$(this).val()+"</option>";
 		});
@@ -119,7 +119,6 @@ $(document).ready(function(){
 	
 	$(document).on("click",".badge-extract",function(){
 		$(this).parent().remove();
-		
 	});
 	
 	$(document).on("click",".dobut",function(){
@@ -188,7 +187,7 @@ $(document).ready(function(){
 							作业名称： <input type="text" name="jobName" id="jobName" title="作业名称"/>
 							<div>
 								<span>参数列表：</span>
-								<select class="configs">
+								<select name="config" class="configs">
 									<c:forEach items="${configs }" var="o">
 										<option value="${o }">${o }</option>
 									</c:forEach>

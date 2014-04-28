@@ -139,11 +139,25 @@ public class Console {
 
 	@At
 	@AdaptBy(type = UploadAdaptor.class, args = { "${app.root}/WEB-INF/tmp" })
-	public void uploadJar(@Param("jar") TempFile file, @Param("mainMethod") String mainMethod, @Param("jobName") String jobName) {
+	public void uploadJar(@Param("jar") TempFile file, @Param("mainMethod") String mainMethod, @Param("jobName") String jobName,
+			@Param("config") String[] configs, @Param("configVal") Object[] configVals) {
 		if (null == file) {
 			throw new ServiceException("请选择上传文件!");
 		}
-		submit(fileUtil.upload(file), mainMethod, jobName, null);
+		if ((Lang.isEmptyArray(configs) && !Lang.isEmptyArray(configVals)) || (!Lang.isEmptyArray(configs) && Lang.isEmptyArray(configVals))) {
+			throw new ServiceException("所提交的参数有误!");
+		}
+		StringBuffer configKV = null;
+		if (!Lang.isEmptyArray(configs) && !Lang.isEmptyArray(configVals)) {
+			if (configs.length != configVals.length) {
+				throw new ServiceException("参数名值对不对应!");
+			}
+			configKV = new StringBuffer("");
+			for (int i = 0; i < configs.length; i++) {
+				configKV.append(configs[i] + ":" + configVals[i]);
+			}
+		}
+		submit(fileUtil.upload(file), mainMethod, jobName, configKV.toString());
 	}
 
 	/**
@@ -174,7 +188,7 @@ public class Console {
 	 *            可以自定义一些参数
 	 */
 	@At
-	public String submit(String jarPath, String mainMethod, String jobName, Map stormConf) {
+	public String submit(String jarPath, String mainMethod, String jobName, String stormConf) {
 		boolean emptyMain = StringUtils.isEmpty(mainMethod);
 		JarFile jarFile = null;
 		try {
@@ -190,12 +204,12 @@ public class Console {
 						if (!emptyMain) {
 							if (mainMethod.equals(c.getName())) {
 								System.setProperty("storm.jar", jarPath);
-								method.invoke(c, (Object) new String[] { jobName });
+								method.invoke(c, (Object) new String[] { jobName, stormConf });
 								return "提交成功";
 							}
 						} else {
 							if (method.getName().equals("main")) {
-								method.invoke(c, jobName);
+								method.invoke(c, (Object) new String[] { jobName, stormConf });
 								return "提交成功";
 							}
 						}
